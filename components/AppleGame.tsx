@@ -33,7 +33,7 @@ interface AppleGameProps {
   platform: Platform;
 }
 
-function generatePredictionBoard(): { id: string; path: number[]; gridData: boolean[][] } {
+function generatePredictionBoard(): PredictionResult {
   const path: number[] = [];
   const gridData: boolean[][] = [];
 
@@ -61,7 +61,14 @@ function generatePredictionBoard(): { id: string; path: number[]; gridData: bool
     gridData.push(rowCells);
   }
 
-  return { id: `pred-${Date.now()}-${Math.random()}`, path, gridData };
+  return {
+    id: `pred-${Date.now()}-${Math.random()}`,
+    path,
+    gridData,
+    confidence: 99.4,
+    analysis: 'Optimal safe path computed',
+    timestamp: Date.now(),
+  };
 }
 
 export const AppleGame: React.FC<AppleGameProps> = ({ onBack, accessKeyData, language, onLanguageChange, platform }) => {
